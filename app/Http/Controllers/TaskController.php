@@ -17,7 +17,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $task= DB::select(DB::raw("SELECT t.*,c.`client_name` FROM `tasks` t LEFT JOIN `clients` c ON t.`client_id` = c.`id`"));
+        $task= DB::select(DB::raw("SELECT t.*,c.`client_name` FROM `tasks` t LEFT JOIN `clients` c ON t.`client_id` = c.`id` order by t.task_id asc"));
         return view('task/task_index',compact('task'));
     }
 
@@ -50,7 +50,9 @@ class TaskController extends Controller
             'user_id'=>Auth::user()->id,
             'created_at' => date("Y-m-d h:i:s"),
         ]);
-
+        $dataTask=Task::find($data->id);
+        $dataTask['task_id']=$data->id;
+        $dataTask->save();
         if ($request->hasFile('files')) {
             $id = $data->id;
             $file = $request->file('files');
@@ -111,11 +113,26 @@ class TaskController extends Controller
     public function update(Request $request, int $id)
     {
         $task=Task::find($id);
-        $task['client_id']=$request->client_id;
-        $task['task_name']=$request->task_name;
-        $task['notes']=$request->notes;
-        $task['status']=$request->status;
-        $task['additional_details']=$request->additional_details;
+        if(isset($request->client_id))
+        {
+            $task['client_id']=$request->client_id;
+        }
+        if(isset($request->task_name))
+        {
+            $task['task_name']=$request->task_name;
+        }
+        if(isset($request->notes))
+        {
+            $task['notes']=$request->notes;
+        }
+        if(isset($request->status))
+        {
+            $task['status']=$request->status;
+        }
+        if(isset($request->additional_details))
+        {
+            $task['additional_details']=$request->additional_details;
+        }
         $task->save();
         if ($request->hasFile('files')) {
             $id = $id;
@@ -159,5 +176,15 @@ class TaskController extends Controller
         $task['notes']=$notes;
         $task->save();
 
+    }
+    public function tasksUpdateTable(Request $request)
+    {
+        $data= json_decode($request->json);
+        foreach ($data as $key => $value) {
+            $newkey=explode('table-',$key);
+           return DB::statement("UPDATE `tasks` t, `tasks` AS t2
+            SET t.task_id = t2.task_id, t2.task_id = t.task_id
+            WHERE t.task_id = '$value' AND t2.task_id = '$newkey[1]'");
+        }
     }
 }

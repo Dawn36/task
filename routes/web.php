@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('client', ClientController::class);
     Route::resource('tasks', TaskController::class);
     Route::get('tasks_update', [TaskController::class, 'tasksUpdate'])->name('tasks_update');
+    Route::get('tasks_update_table', [TaskController::class, 'tasksUpdateTable'])->name('tasks_update_table');
     Route::resource('settings', SettingsController::class);
     Route::post('/settings/{id}/updateEmail', [SettingsController::class, 'updateEmail'])->name('updateEmail');
     Route::post('/settings/{id}/updatePassword', [SettingsController::class, 'updatePassword'])->name('updatePassword');

@@ -105,7 +105,7 @@
         $('#search').on('keyup', function() {
             table.search(this.value).draw();
         });
-
+        
         
         var quill = new Quill('.kt_docs_quill_basic1', {
             modules: {
@@ -143,6 +143,7 @@
 
        
     });
+    
 </script>
 <!--end::Javascript-->
 </body>

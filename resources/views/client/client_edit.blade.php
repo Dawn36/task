@@ -8,8 +8,8 @@
             <input type="text" required name="client_name" value="{{$client->client_name}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter the Name here." />
         </div>
         <div class="fv-row mb-7">
-            <label class="required fw-bold fs-6 mb-2">Note</label>
-            <textarea name="client_note" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact" required>{{$client->client_note}}</textarea>
+            <label class=" fw-bold fs-6 mb-2">Note</label>
+            <textarea name="client_note" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact" >{{$client->client_note}}</textarea>
         </div>
     </div>
     <!--end::Scroll-->

@@ -58,17 +58,10 @@ class ClientController extends Controller
     public function show(int $id)
     {
         $client=Client::find($id);
-        $task= DB::select(DB::raw("SELECT t.*,c.`client_name` FROM `tasks` t LEFT JOIN `clients` c ON t.`client_id` = c.`id` where t.`client_id`=$id"));
-        $taskId = [];
-            foreach($task as $tasks) {
-                $taskId[] = $tasks->id;
-            }
-        $taskFile=array();
-        if(count($task) > 0)
-        {
-            $taskFile=DB::table('task_files')->whereIn('task_id',$taskId)->get();
-        }
-        return view('client/client_show',compact('client','taskFile','task'));
+        $task= DB::select(DB::raw("SELECT t.*,c.`client_name` FROM `tasks` t LEFT JOIN `clients` c ON t.`client_id` = c.`id` where t.`client_id`=$id order by t.task_id asc"));
+     
+        $clientFile=DB::table('client_file')->where('client_id',$id)->get();
+        return view('client/client_show',compact('client','clientFile','task'));
         
     }
 
@@ -97,7 +90,6 @@ class ClientController extends Controller
         if(isset($request->client_note))
         {
             $client['client_note']=$request->client_note;
-            
         }
         if(isset($request->client_name))
         {
@@ -134,7 +126,27 @@ class ClientController extends Controller
             $client['account_note']=$request->account_note;
             
         }
+
         $client->save();
+        if ($request->hasFile('files')) {
+            $id = $id;
+            $file = $request->file('files');
+            $path = "clientFile/" . $id;
+            for ($i = 0; $i < count($file); $i++) {
+                $size = $file[$i]->getSize();
+                $filename = date('YmdHi') . $file[$i]->getClientOriginalName();
+                $file[$i]->move(public_path($path), $filename);
+                $paths = "clientFile/".$id."/".$filename;
+                DB::table('client_file')->insert([
+                    'client_id' => $id,
+                    'user_id' => Auth::user()->id,
+                    'file_name' => $file[$i]->getClientOriginalName(),
+                    'path' => $paths,
+                    'size' => $size,
+                    'created_at' => DATE("Y-m-d"),
+                ]);
+            }
+        }
         return redirect()->back();
     }
 

@@ -38,8 +38,8 @@
                     <div class="d-flex flex-column scroll-y me-n7 pe-7 pt-10" id="" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
                         <div class="row mb-7">
                             <div class="col-lg-6">
-                                <label class="required fw-bold fs-6 mb-2">Master Status</label>
-                                <select name="master_status" class="form-control form-control-solid mb-3 mb-lg-0" required>
+                                <label class=" fw-bold fs-6 mb-2">Master Status</label>
+                                <select name="master_status" class="form-control form-control-solid mb-3 mb-lg-0" >
                                     <option value="prospect" {{$client->master_status== 'prospect' ? 'Selected' : ''}}>Prospect</option>
                                     <option value="quoted" {{$client->master_status== 'quoted' ? 'Selected' : ''}}>Quoted</option>
                                     <option value="active client" {{$client->master_status== 'active client' ? 'Selected' : ''}}>Active Client</option>
@@ -53,18 +53,18 @@
                         </div>
                         <div class="row mb-7">
                             <div class="col-lg-6">
-                                <label class="required fw-bold fs-6 mb-2">Contact Name</label>
-                                <input type="text" name="contact_name" value="{{$client->contact_name}}" class="form-control form-control-solid mb-3 mb-lg-0" required />
+                                <label class=" fw-bold fs-6 mb-2">Contact Name</label>
+                                <input type="text" name="contact_name" value="{{$client->contact_name}}" class="form-control form-control-solid mb-3 mb-lg-0"  />
                             </div>
                             <div class="col-lg-6">
-                                <label class="required fw-bold fs-6 mb-2">Website</label>
-                                <input type="text" name="website" value="{{$client->website}}" class="form-control form-control-solid mb-3 mb-lg-0" required/>
+                                <label class=" fw-bold fs-6 mb-2">Website</label>
+                                <input type="text" name="website" value="{{$client->website}}" class="form-control form-control-solid mb-3 mb-lg-0" />
                             </div>
                         </div>
                         <div class="row mb-7">
                             <div class="col-lg-6">
-                                <label class="required fw-bold fs-6 mb-2">Phone</label>
-                                <input type="number" name="phone" value="{{$client->phone}}" class="form-control form-control-solid mb-3 mb-lg-0" required/>
+                                <label class=" fw-bold fs-6 mb-2">Phone</label>
+                                <input type="number" name="phone" value="{{$client->phone}}" class="form-control form-control-solid mb-3 mb-lg-0" />
                             </div>
                             <div class="col-lg-6">
                                 <label class="required fw-bold fs-6 mb-2">Email Address</label>
@@ -72,8 +72,8 @@
                             </div>
                         </div>
                         <div class="row mb-7">
-                            <label class="required fw-bold fs-6 mb-2">Account Note</label>
-                            <textarea name="account_note" class="form-control form-control-solid mb-3 mb-lg-0" required>{{$client->account_note}}</textarea>
+                            <label class=" fw-bold fs-6 mb-2">Account Note</label>
+                            <textarea name="account_note" class="form-control form-control-solid mb-3 mb-lg-0" >{{$client->account_note}}</textarea>
                         </div>
                         <div class="text-center">
                             <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">Discard</button>
@@ -92,11 +92,11 @@
                         <!--begin::Files-->
                         <div class="d-flex flex-column mb-9" style="overflow: auto;height: 355px;"> 
                             <!--begin::File-->
-                            @for ($i = 0; $i < count($taskFile); $i++)
+                            @for ($i = 0; $i < count($clientFile); $i++)
                             <div class="d-flex align-items-center mb-5">
                                 <div class="symbol symbol-30px me-5">
                                     <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-10-09-043348/core/html/src/media/icons/duotune/files/fil023.svg-->
-                                    <a href="{{ asset($taskFile[$i]->path)}}" ><span class="svg-icon  svg-icon-2hx  svg-icon-primary">
+                                    <a href="{{ asset($clientFile[$i]->path)}}" ><span class="svg-icon  svg-icon-2hx  svg-icon-primary">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path opacity="0.3" d="M5 15C3.3 15 2 13.7 2 12C2 10.3 3.3 9 5 9H5.10001C5.00001 8.7 5 8.3 5 8C5 5.2 7.2 3 10 3C11.9 3 13.5 4 14.3 5.5C14.8 5.2 15.4 5 16 5C17.7 5 19 6.3 19 8C19 8.4 18.9 8.7 18.8 9C18.9 9 18.9 9 19 9C20.7 9 22 10.3 22 12C22 13.7 20.7 15 19 15H5ZM5 12.6H13L9.7 9.29999C9.3 8.89999 8.7 8.89999 8.3 9.29999L5 12.6Z" fill="currentColor"/>
                                         <path d="M17 17.4V12C17 11.4 16.6 11 16 11C15.4 11 15 11.4 15 12V17.4H17Z" fill="currentColor"/>
@@ -107,16 +107,26 @@
                                         <!--end::Svg Icon-->
                                 </div>
                                 <div class="fw-bold">
-                                    <a class="fs-6 fw-bolder text-dark text-hover-primary" href="{{ asset($taskFile[$i]->path)}}">{{$taskFile[$i]->file_name}}</a>
-                                    <div class="text-gray-400">{{DATE('Y-m-d',strtotime($taskFile[$i]->created_at))}}
+                                    <a class="fs-6 fw-bolder text-dark text-hover-primary" href="{{ asset($clientFile[$i]->path)}}">{{$clientFile[$i]->file_name}}</a>
+                                    <div class="text-gray-400">{{DATE('Y-m-d',strtotime($clientFile[$i]->created_at))}}
                                     </div>
                                 </div>
                             </div>
                             @endfor
                             
                         </div>
+                        <form  method="POST" action="{{ route('client.update',$client->id) }}"  enctype="multipart/form-data">
+                            @method("PUT")
+                            @csrf
+                        <input type="file" name="files[]" class="form-control form-control-solid rounded-3" multiple>
                         <!--end::Files-->
+                        <div class="text-center pt-15">
+                            <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">Discard</button>
+                            <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">Submit</button>
+                        </div>
+                        </form>
                     </div>
+                    
                     <!--end::Card body -->
                 </div>
             </div>
@@ -125,10 +135,11 @@
             <div class="tab-pane fade " id="kt_client_tasks" role="tabpanel">
                 <div class="card card-flush">
                     <div class="card-body d-flex flex-column p-0">
-                        <table class="kt_datatable_example_1 table table-row-bordered gy-5">
+                        <table class="kt_datatable_example_2 table table-row-bordered gy-5">
                             <thead>
                                 <tr class="fw-bold fs-6 text-muted">
-                                    <th class="w-5px">ID</th>
+                                    <th hidden>ID</th>
+                                    <th class="w-5px" ></th>
                                     <th>Status</th>
                                     <th>Client</th>
                                     <th>Task Name</th>
@@ -137,10 +148,15 @@
                                 </tr>
                             </thead>
                             <tbody class="fw-bold text-gray-600">
-                                @for ($i = 0; $i < count($task); $i++) @php $a=$i; $a++; @endphp
-                                <tr>
+                                @for ($i = 0; $i < count($task); $i++) @php $a=$i; $a++; $taskId=$task[$i]->task_id; @endphp
+                                <tr id="table-{{$taskId}}">
+                                    <td hidden>
+                                        {{$taskId}}
+                                    </td>
                                     <td>
-                                        {{$a}}
+                                        <div class="symbol symbol-20px cursor-pointer">
+                                            <img alt="Icon" src="{{ asset('theme/assets/media/svg/files/drag.png')}}">
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="badge badge-sm badge-light-info d-inline">{{ucwords($task[$i]->status)}}</div>
@@ -184,3 +200,31 @@
         </div>
         <!--end:::Tab content-->
     </div>
+    <script>
+        $(document).ready(function() {
+           // Datatables
+           var table2 = $('.kt_datatable_example_2').DataTable({
+               rowReorder:{ selector: 'td:nth-child(2)',
+                       }
+                       
+           });
+           table2.on('row-reorder', function ( e, details, edit ) {
+           console.log(edit.values);
+           tableSwap(JSON.stringify(edit.values));
+   
+       });
+       });
+       function tableSwap(json) {
+           var value = {
+               json: json,
+           };
+       $.ajax({
+           type: 'GET',
+           url: "{{ route('tasks_update_table') }}",
+           data: value,
+           success: function(result) {
+              console.log(result);
+           }
+       });
+   }
+       </script>
