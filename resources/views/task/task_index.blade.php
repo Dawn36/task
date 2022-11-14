@@ -83,32 +83,12 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-icon btn-active-light- w-30px h-30px ms-auto" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                                    <div class="badge badge-sm badge-light-info d-inline">{{ucwords($task[$i]->status)}}</div>
-                                                </button>
-                                                <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" data-kt-menu-id="kt-users-tasks">
-                                                    <div class="px-7 py-5">
-                                                        <div class="fs-5 text-dark fw-bolder">Update Status</div>
-                                                    </div>
-                                                    <div class="separator border-gray-200"></div>
-                                                    <form class="form px-7 py-5" method="POST" action="{{ route('tasks.update',$task[$i]->id) }}" data-kt-menu-id="kt-users-tasks-form">
-                                                        @method("PUT")
-                                                        @csrf
-                                                        <div class="fv-row mb-10">
-                                                            <label class="form-label fs-6 fw-bold">Status:</label>
-                                                            <select class="form-select form-select-solid" name="status" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-hide-search="true">
-                                                                <option></option>
-                                                                <option value="not started" {{$task[$i]->status == 'not started' ? "Selected" : ''}}>Not Started</option>
-                                                                <option value="in progress" {{$task[$i]->status == 'in progress' ? "Selected" : ''}}>In Progress</option>
-                                                                <option value="on hold" {{$task[$i]->status == 'on hold' ? "Selected" : ''}}>On Hold</option>
-                                                                <option value="completed" {{$task[$i]->status == 'completed' ? "Selected" : ''}}>Completed</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="d-flex justify-content-end">
-                                                            <button type="submit" class="btn btn-sm btn-primary">Apply</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                                <select class="form-select" name="select2_input" data-control="select2" data-placeholder="Select an option" onchange="updateStatusOfTask('{{$task[$i]->id}}',this.value)">
+                                                    <option value="not started" {{$task[$i]->status == 'not started' ? "Selected" : ''}}>Not Started</option>
+                                                    <option value="in progress" {{$task[$i]->status == 'in progress' ? "Selected" : ''}}>In Progress</option>
+                                                    <option value="on hold" {{$task[$i]->status == 'on hold' ? "Selected" : ''}}>On Hold</option>
+                                                    <option value="completed" {{$task[$i]->status == 'completed' ? "Selected" : ''}}>Completed</option>
+                                                </select>
                                             </td>
                                             <td>
                                                 <a href="#" onclick="showTask('{{$task[$i]->id}}')">{{ucwords($task[$i]->client_name)}}</a>
@@ -183,5 +163,20 @@
         }
     });
 }
+    function updateStatusOfTask(id, status)
+    {
+        var value = {
+            id: id,
+            status: status,
+        };
+    $.ajax({
+        type: 'GET',
+        url: "{{ route('update_status_task') }}",
+        data: value,
+        success: function(result) {
+           console.log(result);
+        }
+    });
+    }
     </script>
 @endsection('content')

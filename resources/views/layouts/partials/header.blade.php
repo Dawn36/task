@@ -157,7 +157,7 @@
                 </div>
 
                 <div class="modal fade" id="myModalLg" tabindex="-1" aria-hidden="true" style="z-index: 9999;">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-dialog modal-dialog-centered mw-1000px">
                         <div class="modal-content">
                             <div class="modal-header" id="kt_modal_add_user_header">
                                 <h2 class="fw-bolder modal-title" id="myModalLgHeading"></h2>

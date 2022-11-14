@@ -187,4 +187,12 @@ class TaskController extends Controller
             WHERE t.task_id = '$value' AND t2.task_id = '$newkey[1]'");
         }
     }
+    public function updateStatusOfTask(Request $request)
+    {
+        $id=$request->id;
+        $status=$request->status;
+        $task = Task::find($id);
+        $task['status']=$status;
+        $task->save();
+    }
 }
