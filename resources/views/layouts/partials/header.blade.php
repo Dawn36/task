@@ -161,7 +161,7 @@
                         <div class="modal-content">
                             <div class="modal-header" id="kt_modal_add_user_header">
                                 <h2 class="fw-bolder modal-title" id="myModalLgHeading"></h2>
-                                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2 close" data-bs-dismiss="modal" aria-label="Close">
                                     <span class="svg-icon svg-icon-2x">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
@@ -181,7 +181,7 @@
                         <div class="modal-content">
                             <div class="modal-header" id="kt_modal_add_user_header">
                                 <h2 class="fw-bolder modal-title" id="myModalXlHeading"></h2>
-                                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2 " data-bs-dismiss="modal" aria-label="Close">
                                     <span class="svg-icon svg-icon-2x">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>

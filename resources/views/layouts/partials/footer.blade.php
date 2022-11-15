@@ -143,7 +143,12 @@
 
        
     });
-    
+    $(document).click(function (e) {
+    if ($(e.target).is('#myModalLg')) {
+        $('#myModalLg').modal('hide');
+        $('#tasks_update_form').submit();
+    }
+    });
 </script>
 <!--end::Javascript-->
 </body>
